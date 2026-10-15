@@ -1,8 +1,21 @@
 [phases.setup]
-nixPkgs = ["python311", "postgresql", "gcc"]
+nixPkgs = [
+    "python311",
+    "python311Packages.pip",
+    "python311Packages.setuptools",
+    "python311Packages.wheel",
+    "postgresql",
+    "gcc",
+    "zlib",
+    "libffi",
+    "openssl"
+]
 
 [phases.install]
-cmds = ["pip install --upgrade pip", "pip install -r requirements.txt"]
+cmds = [
+    "python -m pip install --upgrade pip setuptools wheel",
+    "python -m pip install --no-cache-dir -r requirements.txt"
+]
 
 [start]
 cmd = "python main.py"
